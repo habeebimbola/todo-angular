@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Item } from './item';
+import { ItemComponent } from "./item/item.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet,CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [RouterOutlet, CommonModule, ItemComponent]
 })
 export class AppComponent {
   title = 'You are welcome to the world of Angular Progamming!';
 
-  filter : "all" | "actuve" | "done" = "all";
+  filter: 'all' | 'active' | 'done' = 'all';
 
   allItems = [{ description: "Sleep", done: true},
               {description: "Eat", done: false},
@@ -31,4 +33,7 @@ export class AppComponent {
      this.allItems.unshift({description, done:false});
   }
  
+  remove(item:Item){
+    this.allItems.splice(this.allItems.indexOf(item),1);
+  }
 }
